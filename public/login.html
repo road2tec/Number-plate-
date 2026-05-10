@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Login – SmartPark</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="auth-body">
+<div class="auth-bg">
+  <div class="auth-orb orb1"></div>
+  <div class="auth-orb orb2"></div>
+  <div class="auth-orb orb3"></div>
+</div>
+
+<nav class="navbar" style="background:transparent;box-shadow:none">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🅿</span><span>SmartPark</span></a>
+  </div>
+</nav>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-icon">🔐</div>
+      <h1>Welcome Back</h1>
+      <p>Sign in to your SmartPark account</p>
+    </div>
+
+    <div id="alertBox" class="alert hidden"></div>
+
+    <form id="loginForm" class="auth-form">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <span class="input-icon">✉️</span>
+          <input type="email" id="email" placeholder="you@example.com" required autocomplete="email"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password"/>
+          <button type="button" class="toggle-pass" id="togglePass">👁</button>
+        </div>
+      </div>
+      <button type="submit" class="btn-auth" id="loginBtn">
+        <span id="btnText">Sign In</span>
+        <span id="btnSpinner" class="spinner hidden"></span>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Don't have an account? <a href="register.html">Create one free →</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+document.getElementById('togglePass').addEventListener('click', function() {
+  const pw = document.getElementById('password');
+  pw.type = pw.type === 'password' ? 'text' : 'password';
+  this.textContent = pw.type === 'password' ? '👁' : '🙈';
+});
+
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('loginBtn');
+  const txt = document.getElementById('btnText');
+  const spin = document.getElementById('btnSpinner');
+  btn.disabled = true; txt.textContent = 'Signing in...'; spin.classList.remove('hidden');
+
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (data.success) {
+      localStorage.setItem('sp_token', data.token);
+      localStorage.setItem('sp_user', JSON.stringify(data.user));
+      showAlert('Login successful! Redirecting...', 'success');
+      setTimeout(() => window.location.href = 'dashboard.html', 1000);
+    } else {
+      showAlert(data.message || 'Login failed', 'error');
+      btn.disabled = false; txt.textContent = 'Sign In'; spin.classList.add('hidden');
+    }
+  } catch(err) {
+    showAlert('Server error. Please try again.', 'error');
+    btn.disabled = false; txt.textContent = 'Sign In'; spin.classList.add('hidden');
+  }
+});
+
+function showAlert(msg, type) {
+  const a = document.getElementById('alertBox');
+  a.textContent = msg;
+  a.className = `alert alert-${type}`;
+}
+</script>
+</body>
+</html>

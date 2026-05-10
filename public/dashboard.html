@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Dashboard – SmartPark</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="dash-body">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🅿</span><span>SmartPark</span></a>
+  </div>
+  <div class="sidebar-user">
+    <div class="user-avatar" id="userAvatar">U</div>
+    <div>
+      <div class="user-name" id="sidebarName">Loading...</div>
+      <div class="user-email" id="sidebarEmail">—</div>
+    </div>
+  </div>
+
+  <div class="sidebar-stats">
+    <div class="sb-stat">
+      <div class="sb-stat-label">OFFICE BOOKING</div>
+      <div class="sb-stat-value" id="sbOffice">5 Slots Allocated</div>
+      <div class="sb-stat-bar"><div class="sb-bar-fill" style="background:#a78bfa;width:25%"></div></div>
+    </div>
+    <div class="sb-stat">
+      <div class="sb-stat-label">ONLINE BOOKINGS</div>
+      <div class="sb-stat-value" id="sbOnline">10 Slots Reserved</div>
+      <div class="sb-bar-fill" style="background:#38bdf8;width:50%"></div>
+    </div>
+    <div class="sb-stat">
+      <div class="sb-stat-label">LIVE VISIT TIME</div>
+      <div class="sb-stat-value" id="sbTime">Waiting...</div>
+    </div>
+    <div class="sb-stat">
+      <div class="sb-stat-label">AVAILABLE SPOTS</div>
+      <div class="sb-stat-value" id="sbAvail">—</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="#" class="sb-link active" data-tab="map">🗺️ Floor Map</a>
+    <a href="#" class="sb-link" data-tab="book">➕ Book Slot</a>
+    <a href="#" class="sb-link" data-tab="mybookings">📋 My Bookings</a>
+    <a href="#" class="sb-link" data-tab="profile">👤 Profile</a>
+  </nav>
+
+  <button class="sidebar-logout" id="logoutBtn">🚪 Logout</button>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="dash-main">
+  <header class="dash-header">
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <h2 class="dash-title" id="pageTitle">Real-Time Floor Map</h2>
+    <div class="header-actions">
+      <span class="live-badge">🟢 LIVE</span>
+    </div>
+  </header>
+
+  <!-- TAB: FLOOR MAP -->
+  <div class="tab-content active" id="tab-map">
+    <div class="legend">
+      <span class="legend-item"><span class="dot dot-office"></span>Office Booked</span>
+      <span class="legend-item"><span class="dot dot-online"></span>Online Booked</span>
+      <span class="legend-item"><span class="dot dot-reserved"></span>Reserved</span>
+      <span class="legend-item"><span class="dot dot-avail"></span>Available</span>
+    </div>
+    <div class="floor-map-container">
+      <div class="floor-label">Floor 1</div>
+      <div class="floor-grid" id="floorGrid">
+        <div class="loading-slots">Loading slots...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: BOOK SLOT -->
+  <div class="tab-content" id="tab-book">
+    <div class="book-container">
+      <h3 class="sub-title">Book a Parking Slot</h3>
+      <div id="bookAlertBox" class="alert hidden"></div>
+      <form id="bookingForm" class="booking-form">
+        <div class="form-group">
+          <label>Select Available Slot</label>
+          <select id="slotSelect" required>
+            <option value="">-- Choose a slot --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Vehicle Number</label>
+          <div class="input-wrap">
+            <span class="input-icon">🚘</span>
+            <input type="text" id="bookVehicle" placeholder="MH12AB1234" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Duration (hours)</label>
+          <div class="duration-picker">
+            <button type="button" class="dur-btn" id="durMinus">−</button>
+            <span id="durVal">1</span>
+            <button type="button" class="dur-btn" id="durPlus">+</button>
+            <span class="dur-unit">hr(s)</span>
+          </div>
+        </div>
+        <div class="price-summary">
+          <span>Total Amount:</span>
+          <span class="price-total" id="totalPrice">₹30</span>
+        </div>
+        <button type="submit" class="btn-auth" id="payBtn">
+          <span id="payBtnText">💳 Pay with Razorpay</span>
+          <span id="paySpinner" class="spinner hidden"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TAB: MY BOOKINGS -->
+  <div class="tab-content" id="tab-mybookings">
+    <h3 class="sub-title">My Bookings</h3>
+    <div class="bookings-list" id="bookingsList">
+      <div class="loading-slots">Loading bookings...</div>
+    </div>
+  </div>
+
+  <!-- TAB: PROFILE -->
+  <div class="tab-content" id="tab-profile">
+    <div class="profile-card">
+      <div class="profile-avatar" id="profileAvatar">U</div>
+      <div class="profile-info">
+        <div class="profile-row"><span>Name</span><strong id="pName">—</strong></div>
+        <div class="profile-row"><span>Email</span><strong id="pEmail">—</strong></div>
+        <div class="profile-row"><span>Phone</span><strong id="pPhone">—</strong></div>
+        <div class="profile-row"><span>Vehicle</span><strong id="pVehicle">—</strong></div>
+        <div class="profile-row"><span>Role</span><strong id="pRole">—</strong></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- BOOKING MODAL -->
+<div id="bookModal" class="modal-overlay hidden">
+  <div class="modal-card">
+    <h3>✅ Booking Confirmed!</h3>
+    <p id="modalMsg">Your slot has been reserved.</p>
+    <button onclick="closeModal()" class="btn-primary">Close</button>
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Register – SmartPark</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="auth-body">
+<div class="auth-bg">
+  <div class="auth-orb orb1"></div>
+  <div class="auth-orb orb2"></div>
+  <div class="auth-orb orb3"></div>
+</div>
+
+<nav class="navbar" style="background:transparent;box-shadow:none">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🅿</span><span>SmartPark</span></a>
+  </div>
+</nav>
+
+<div class="auth-wrapper">
+  <div class="auth-card" style="max-width:480px">
+    <div class="auth-header">
+      <div class="auth-icon">🚗</div>
+      <h1>Create Account</h1>
+      <p>Join SmartPark — it's free to sign up</p>
+    </div>
+
+    <div id="alertBox" class="alert hidden"></div>
+
+    <form id="registerForm" class="auth-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input type="text" id="name" placeholder="John Doe" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <div class="input-wrap">
+            <span class="input-icon">📱</span>
+            <input type="tel" id="phone" placeholder="+91 98765 43210"/>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <span class="input-icon">✉️</span>
+          <input type="email" id="email" placeholder="you@example.com" required autocomplete="email"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="vehicleNumber">Vehicle Number</label>
+        <div class="input-wrap">
+          <span class="input-icon">🚘</span>
+          <input type="text" id="vehicleNumber" placeholder="MH12AB1234"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="password" placeholder="Min. 8 characters" required autocomplete="new-password"/>
+          <button type="button" class="toggle-pass" id="togglePass">👁</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirm">Confirm Password</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔒</span>
+          <input type="password" id="confirm" placeholder="Repeat password" required/>
+        </div>
+      </div>
+      <button type="submit" class="btn-auth" id="regBtn">
+        <span id="btnText">Create Account</span>
+        <span id="btnSpinner" class="spinner hidden"></span>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <p>Already have an account? <a href="login.html">Sign in →</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+document.getElementById('togglePass').addEventListener('click', function() {
+  const pw = document.getElementById('password');
+  pw.type = pw.type === 'password' ? 'text' : 'password';
+  this.textContent = pw.type === 'password' ? '👁' : '🙈';
+});
+
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const password = document.getElementById('password').value;
+  const confirm = document.getElementById('confirm').value;
+
+  if (password !== confirm) { showAlert('Passwords do not match!', 'error'); return; }
+  if (password.length < 8) { showAlert('Password must be at least 8 characters.', 'error'); return; }
+
+  const btn = document.getElementById('regBtn');
+  const txt = document.getElementById('btnText');
+  const spin = document.getElementById('btnSpinner');
+  btn.disabled = true; txt.textContent = 'Creating account...'; spin.classList.remove('hidden');
+
+  const payload = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    password,
+    phone: document.getElementById('phone').value,
+    vehicleNumber: document.getElementById('vehicleNumber').value
+  };
+
+  try {
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      localStorage.setItem('sp_token', data.token);
+      localStorage.setItem('sp_user', JSON.stringify(data.user));
+      showAlert('Account created! Redirecting...', 'success');
+      setTimeout(() => window.location.href = 'dashboard.html', 1200);
+    } else {
+      showAlert(data.message || 'Registration failed', 'error');
+      btn.disabled = false; txt.textContent = 'Create Account'; spin.classList.add('hidden');
+    }
+  } catch(err) {
+    showAlert('Server error. Please try again.', 'error');
+    btn.disabled = false; txt.textContent = 'Create Account'; spin.classList.add('hidden');
+  }
+});
+
+function showAlert(msg, type) {
+  const a = document.getElementById('alertBox');
+  a.textContent = msg;
+  a.className = `alert alert-${type}`;
+}
+</script>
+</body>
+</html>

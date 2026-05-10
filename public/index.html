@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartPark – Advance Parking System</title>
+  <meta name="description" content="Book your parking slot online instantly with SmartPark – the modern advance parking system with real-time slot tracking."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🅿</span>
+      <span>SmartPark</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="login.html" class="btn-outline">Login</a></li>
+      <li><a href="register.html" class="btn-primary">Get Started</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="floating-cards">
+    <div class="float-card fc1">🚗 Slot #7 Booked</div>
+    <div class="float-card fc2">✅ Payment Confirmed</div>
+    <div class="float-card fc3">📍 5 Spots Left</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🏆 India's #1 Smart Parking Platform</div>
+    <h1 class="hero-title">Park Smarter,<br/><span class="gradient-text">Not Harder</span></h1>
+    <p class="hero-subtitle">Book your parking spot in seconds. Real-time slot tracking, instant confirmation & secure online payment via Razorpay.</p>
+    <div class="hero-actions">
+      <a href="register.html" class="btn-hero-primary">Book a Slot Now →</a>
+      <a href="#how" class="btn-hero-ghost">See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="statSlots">20</span><span class="stat-label">Total Slots</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num" id="statAvail">–</span><span class="stat-label">Available Now</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">₹30</span><span class="stat-label">Per Hour</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="parking-preview">
+      <div class="preview-header">🅿 Live Parking Map</div>
+      <div class="preview-grid" id="previewGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-badge">Features</div>
+    <h2 class="section-title">Everything You Need</h2>
+    <p class="section-sub">From booking to payment — all in one place</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">🗺️</div>
+        <h3>Real-Time Floor Map</h3>
+        <p>See live availability of all 20 parking slots color-coded by status — office, online & available.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">💳</div>
+        <h3>Online Payment</h3>
+        <p>Pay securely via Razorpay — UPI, Cards, Net Banking all supported. Instant confirmation.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#10b981,#059669)">⚡</div>
+        <h3>Instant Booking</h3>
+        <p>Reserve your slot in under 30 seconds. Choose duration, pay & get confirmed receipt.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">📊</div>
+        <h3>Live Dashboard</h3>
+        <p>Track your bookings, history and slot status from your personal dashboard anytime.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626)">🔐</div>
+        <h3>Secure Auth</h3>
+        <p>JWT-based authentication keeps your account and booking data safe at all times.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:linear-gradient(135deg,#ec4899,#be185d)">📱</div>
+        <h3>Mobile Ready</h3>
+        <p>Fully responsive design works perfectly on phones, tablets and desktops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how">
+  <div class="container">
+    <div class="section-badge">Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-icon">📝</div><h3>Register</h3><p>Create your free account with vehicle details.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step"><div class="step-num">02</div><div class="step-icon">🗺️</div><h3>Choose Slot</h3><p>View the live floor map and pick an available spot.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step"><div class="step-num">03</div><div class="step-icon">💳</div><h3>Pay Online</h3><p>Complete payment via Razorpay in seconds.</p></div>
+      <div class="step-arrow">→</div>
+      <div class="step"><div class="step-num">04</div><div class="step-icon">✅</div><h3>Park & Go</h3><p>Arrive at your reserved slot and enjoy stress-free parking.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="section-badge">Pricing</div>
+    <h2 class="section-title">Simple, Transparent Pricing</h2>
+    <div class="pricing-cards">
+      <div class="price-card">
+        <div class="price-type">Online Booking</div>
+        <div class="price-amount">₹30<span>/hr</span></div>
+        <ul class="price-features">
+          <li>✅ Instant confirmation</li>
+          <li>✅ Razorpay payment</li>
+          <li>✅ Slot reserved for you</li>
+          <li>✅ Booking history</li>
+        </ul>
+        <a href="register.html" class="btn-primary" style="width:100%;text-align:center;display:block">Book Now</a>
+      </div>
+      <div class="price-card price-featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-type">Day Pass</div>
+        <div class="price-amount">₹200<span>/day</span></div>
+        <ul class="price-features">
+          <li>✅ Unlimited entry/exit</li>
+          <li>✅ Priority slot</li>
+          <li>✅ 24hr access</li>
+          <li>✅ Email receipt</li>
+        </ul>
+        <a href="register.html" class="btn-primary" style="width:100%;text-align:center;display:block">Get Pass</a>
+      </div>
+      <div class="price-card">
+        <div class="price-type">Monthly</div>
+        <div class="price-amount">₹1500<span>/mo</span></div>
+        <ul class="price-features">
+          <li>✅ Dedicated slot</li>
+          <li>✅ Office allocation</li>
+          <li>✅ Priority support</li>
+          <li>✅ Auto-renew</li>
+        </ul>
+        <a href="register.html" class="btn-primary" style="width:100%;text-align:center;display:block">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Park Smarter?</h2>
+    <p>Join hundreds of drivers already using SmartPark daily.</p>
+    <a href="register.html" class="btn-hero-primary">Create Free Account →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo-icon">🅿</span>
+        <span>SmartPark</span>
+        <p>Advance Parking System — Book, Pay, Park.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 SmartPark. All rights reserved. | Payments secured by Razorpay</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// Live slot stats
+fetch('/api/slots/stats').then(r=>r.json()).then(d=>{
+  if(d.success){ document.getElementById('statAvail').textContent = d.stats.available; }
+}).catch(()=>{});
+
+// Preview grid
+const pg = document.getElementById('previewGrid');
+const types = ['office','office','office','office','office','online','online','online','online','online','online','online','online','online','online','avail','avail','avail','avail','avail'];
+types.forEach((t,i)=>{
+  const s = document.createElement('div');
+  s.className = `preview-slot ps-${t}`;
+  s.textContent = i+1;
+  pg.appendChild(s);
+});
+</script>
+</body>
+</html>
