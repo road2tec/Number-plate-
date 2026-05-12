@@ -43,11 +43,12 @@
     </div>
   </div>
 
-  <nav class="sidebar-nav">
     <a href="#" class="sb-link active" data-tab="map">🗺️ Floor Map</a>
     <a href="#" class="sb-link" data-tab="book">➕ Book Slot</a>
     <a href="#" class="sb-link" data-tab="mybookings">📋 My Bookings</a>
+    <a href="#" class="sb-link" data-tab="monitoring">📊 Live Monitoring</a>
     <a href="#" class="sb-link" data-tab="profile">👤 Profile</a>
+    <a href="http://192.168.1.4/" target="_blank" class="sb-link" style="color: #ff4757; font-weight: bold;">🔴 System Monitor</a>
   </nav>
 
   <button class="sidebar-logout" id="logoutBtn">🚪 Logout</button>
@@ -139,6 +140,25 @@
         <div class="profile-row"><span>Role</span><strong id="pRole">—</strong></div>
       </div>
     </div>
+  </div>
+  <!-- TAB: MONITORING -->
+  <div class="tab-content" id="tab-monitoring">
+    <h3 class="sub-title">Live Monitoring (All Bookings)</h3>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Vehicle</th>
+          <th>Slot</th>
+          <th>Duration</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="bookingsTableBody">
+        <tr><td colspan="6">Loading bookings...</td></tr>
+      </tbody>
+    </table>
   </div>
 </main>
 

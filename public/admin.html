@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Admin Dashboard – SmartPark</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* Table styles moved to style.css */
+  </style>
+</head>
+<body class="dash-body">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🅿</span><span>SmartPark Admin</span></a>
+  </div>
+  
+  <div class="sidebar-stats" style="margin-top: 2rem;">
+    <div class="sb-stat">
+      <div class="sb-stat-label">TOTAL USERS</div>
+      <div class="sb-stat-value" id="statUsers">0</div>
+    </div>
+    <div class="sb-stat">
+      <div class="sb-stat-label">TOTAL BOOKINGS</div>
+      <div class="sb-stat-value" id="statBookings">0</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="#" class="sb-link active" data-tab="users">👥 User Management</a>
+  </nav>
+
+  <button class="sidebar-logout" id="logoutBtn">🚪 Logout</button>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="dash-main">
+  <header class="dash-header">
+    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+    <h2 class="dash-title" id="pageTitle">Admin Panel</h2>
+  </header>
+
+  <!-- TAB: USER MANAGEMENT -->
+  <div class="tab-content active" id="tab-users">
+    <h3 class="sub-title">User Management</h3>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Role</th>
+          <th>Joined</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="usersTableBody">
+        <tr><td colspan="6">Loading users...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

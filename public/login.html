@@ -87,7 +87,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       localStorage.setItem('sp_token', data.token);
       localStorage.setItem('sp_user', JSON.stringify(data.user));
       showAlert('Login successful! Redirecting...', 'success');
-      setTimeout(() => window.location.href = 'dashboard.html', 1000);
+      setTimeout(() => {
+        if (data.user.role === 'admin') window.location.href = 'admin.html';
+        else window.location.href = 'dashboard.html';
+      }, 1000);
     } else {
       showAlert(data.message || 'Login failed', 'error');
       btn.disabled = false; txt.textContent = 'Sign In'; spin.classList.add('hidden');

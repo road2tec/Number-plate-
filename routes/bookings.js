@@ -121,7 +121,20 @@ router.get('/all', protect, require('../middleware/auth').adminOnly, async (req,
   try {
     const bookings = await Booking.find()
       .populate('user', 'name email')
-      .populate('slot', 'slotNumber')
+      .populate('slot', 'slotNumber floor')
+      .sort({ createdAt: -1 });
+    res.json({ success: true, bookings });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// GET /api/bookings/live — open to all authenticated users for live monitoring
+router.get('/live', protect, async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+      .populate('user', 'name email')
+      .populate('slot', 'slotNumber floor')
       .sort({ createdAt: -1 });
     res.json({ success: true, bookings });
   } catch (err) {

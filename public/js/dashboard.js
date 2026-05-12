@@ -39,6 +39,7 @@ tabs.forEach(tab => {
     document.getElementById('pageTitle').textContent = titles[t];
     if (t === 'mybookings') loadMyBookings();
     if (t === 'book') loadAvailableSlots();
+    if (t === 'monitoring') fetchAllBookings();
     // close sidebar on mobile
     if (window.innerWidth < 768) document.getElementById('sidebar').classList.remove('open');
   });
@@ -267,6 +268,51 @@ async function cancelBooking(id) {
     if (data.success) { loadMyBookings(); loadFloorMap(); }
     else alert(data.message);
   } catch (e) { alert('Error cancelling booking.'); }
+}
+
+// ======= LIVE MONITORING =======
+async function fetchAllBookings() {
+  const tbody = document.getElementById('bookingsTableBody');
+  tbody.innerHTML = '<tr><td colspan="6" class="loading-slots">Loading bookings...</td></tr>';
+  try {
+    const res = await fetch('/api/bookings/live', { headers: authHeaders() });
+    const data = await res.json();
+    if (data.success) {
+      renderAllBookings(data.bookings);
+    } else {
+      tbody.innerHTML = `<tr><td colspan="6">Error: ${data.message}</td></tr>`;
+    }
+  } catch (err) {
+    console.error('Error fetching live bookings:', err);
+    tbody.innerHTML = '<tr><td colspan="6">Error loading bookings</td></tr>';
+  }
+}
+
+function renderAllBookings(bookings) {
+  const tbody = document.getElementById('bookingsTableBody');
+  tbody.innerHTML = '';
+  
+  if (bookings.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6">No bookings found.</td></tr>';
+    return;
+  }
+
+  bookings.forEach(b => {
+    const tr = document.createElement('tr');
+    const date = new Date(b.createdAt).toLocaleString();
+    const userName = b.user ? b.user.name : 'Unknown User';
+    const slotNum = b.slot ? `Slot ${b.slot.slotNumber} (Floor ${b.slot.floor})` : 'Deleted Slot';
+    
+    tr.innerHTML = `
+      <td>${userName}</td>
+      <td>${b.vehicleNumber}</td>
+      <td>${slotNum}</td>
+      <td>${b.duration} hr(s)</td>
+      <td>₹${(b.amount / 100).toFixed(2)}</td>
+      <td>${date}</td>
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
 // HELPERS

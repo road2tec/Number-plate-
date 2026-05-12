@@ -255,3 +255,47 @@ select:focus{border-color:var(--primary)}
   .form-row{grid-template-columns:1fr}
 }
 @media(max-width:480px){.floor-grid{grid-template-columns:repeat(3,1fr)}.hero-title{font-size:2rem}}
+
+/* ADMIN & MONITORING TABLE */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.admin-table th, .admin-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+.admin-table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #333;
+}
+.admin-table tr:hover {
+  background-color: #f1f5f9;
+}
+.btn-danger {
+  background: #ff4757;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-danger:hover {
+  background: #e84118;
+}
+.badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.badge-admin { background: #e0e7ff; color: #4338ca; }
+.badge-user { background: #dcfce7; color: #15803d; }

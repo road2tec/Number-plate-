@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/slots', require('./routes/slots'));
 app.use('/api/bookings', require('./routes/bookings'));
+app.use('/api/admin', require('./routes/admin'));
 
 // Catch-all route to serve index.html
 app.get('/', (req, res) => {
