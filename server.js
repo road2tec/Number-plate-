@@ -33,7 +33,7 @@ async function seedSlots() {
     for (let i = 1; i <= 20; i++) {
       let type = 'available';
       let status = 'available';
-      if (i <= 5) { type = 'office'; status = 'occupied'; }
+      if (i <= 5) { type = 'offline'; status = 'occupied'; }
       else if (i <= 15) { type = 'online'; status = 'occupied'; }
       slots.push({ slotNumber: i, floor: 1, type, status });
     }

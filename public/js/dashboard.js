@@ -75,12 +75,12 @@ function renderFloorMap(slots) {
   grid.innerHTML = '';
   slots.forEach(slot => {
     const el = document.createElement('div');
-    const cls = slot.status === 'occupied' && slot.type === 'office' ? 'slot-office'
+    const cls = slot.status === 'occupied' && slot.type === 'offline' ? 'slot-offline'
       : slot.status === 'occupied' && slot.type === 'online' ? 'slot-online'
       : slot.status === 'reserved' ? 'slot-reserved'
       : 'slot-available';
     el.className = `slot-card ${cls}`;
-    const icon = slot.type === 'office' ? '🏢' : slot.type === 'online' ? '🌐' : '✅';
+    const icon = slot.type === 'offline' ? '🏢' : slot.type === 'online' ? '🌐' : '✅';
     const typeLabel = slot.status === 'available' ? 'AVAILABLE' : slot.type.toUpperCase();
     el.innerHTML = `<span class="slot-num">Slot ${slot.slotNumber}</span><span>${icon}</span><span class="slot-type-label">${typeLabel}</span>`;
     if (slot.status === 'available') {
@@ -93,10 +93,10 @@ function renderFloorMap(slots) {
 
 function updateSidebarStats(slots) {
   const avail = slots.filter(s => s.status === 'available').length;
-  const office = slots.filter(s => s.type === 'office' && s.status === 'occupied').length;
+  const offline = slots.filter(s => s.type === 'offline' && s.status === 'occupied').length;
   const online = slots.filter(s => s.type === 'online' && s.status === 'occupied').length;
   document.getElementById('sbAvail').textContent = avail;
-  document.getElementById('sbOffice').textContent = `${office} Slots Allocated`;
+  document.getElementById('sbOffline').textContent = `${offline} Slots Allocated`;
   document.getElementById('sbOnline').textContent = `${online} Slots Reserved`;
   document.getElementById('sbTime').textContent = 'Waiting...';
   const statsRes = fetch('/api/slots/stats', { headers: authHeaders() }).then(r => r.json()).then(d => {

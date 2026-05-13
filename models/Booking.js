@@ -22,7 +22,7 @@ const bookingSchema = new mongoose.Schema({
   razorpayOrderId: { type: String },
   razorpayPaymentId: { type: String },
   razorpaySignature: { type: String },
-  bookingType: { type: String, enum: ['online', 'office'], default: 'online' },
+  bookingType: { type: String, enum: ['online', 'offline'], default: 'online' },
   createdAt: { type: Date, default: Date.now }
 });
 

@@ -71,7 +71,7 @@
       <div class="feature-card">
         <div class="feature-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">🗺️</div>
         <h3>Real-Time Floor Map</h3>
-        <p>See live availability of all 20 parking slots color-coded by status — office, online & available.</p>
+        <p>See live availability of all 20 parking slots color-coded by status — offline, online & available.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon" style="background:linear-gradient(135deg,#06b6d4,#0ea5e9)">💳</div>
@@ -153,7 +153,7 @@
         <div class="price-amount">₹1500<span>/mo</span></div>
         <ul class="price-features">
           <li>✅ Dedicated slot</li>
-          <li>✅ Office allocation</li>
+          <li>✅ Offline allocation</li>
           <li>✅ Priority support</li>
           <li>✅ Auto-renew</li>
         </ul>
@@ -204,7 +204,7 @@ fetch('/api/slots/stats').then(r=>r.json()).then(d=>{
 
 // Preview grid
 const pg = document.getElementById('previewGrid');
-const types = ['office','office','office','office','office','online','online','online','online','online','online','online','online','online','online','avail','avail','avail','avail','avail'];
+const types = ['offline','offline','offline','offline','offline','online','online','online','online','online','online','online','online','online','online','avail','avail','avail','avail','avail'];
 types.forEach((t,i)=>{
   const s = document.createElement('div');
   s.className = `preview-slot ps-${t}`;

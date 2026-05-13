@@ -20,9 +20,9 @@ router.get('/stats', async (req, res) => {
     const available = await ParkingSlot.countDocuments({ status: 'available' });
     const occupied = await ParkingSlot.countDocuments({ status: 'occupied' });
     const reserved = await ParkingSlot.countDocuments({ status: 'reserved' });
-    const officeBooked = await ParkingSlot.countDocuments({ type: 'office' });
-    const onlineBooked = await ParkingSlot.countDocuments({ type: 'online', status: { $ne: 'available' } });
-    res.json({ success: true, stats: { total, available, occupied, reserved, officeBooked, onlineBooked } });
+    const offlineBooked = await ParkingSlot.countDocuments({ type: 'offline' });
+    const onlineBooked = await ParkingSlot.countDocuments({ type: 'online' });
+    res.json({ success: true, stats: { total, available, occupied, reserved, offlineBooked, onlineBooked } });
   } catch (err) {
     res.status(500).json({ success: false, message: 'Server error' });
   }
@@ -35,7 +35,7 @@ router.post('/seed', protect, adminOnly, async (req, res) => {
     const slots = [];
     for (let i = 1; i <= 20; i++) {
       let type = 'available';
-      if (i <= 5) type = 'office';
+      if (i <= 5) type = 'offline';
       else if (i <= 15) type = 'online';
       slots.push({
         slotNumber: i,
